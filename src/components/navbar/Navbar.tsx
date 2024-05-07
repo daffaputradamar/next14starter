@@ -1,6 +1,9 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"
+import { usePathname } from "next/navigation"
 
 function MoneyIcon(props: any) {
     return (
@@ -52,6 +55,8 @@ export default function Navbar() {
         }
     ]
 
+    const pathName = usePathname()
+    
     return (
         <nav className="inset-x-0 top-0 z-50 bg-white shadow-sm dark:bg-gray-950/90">
             <div className="w-full max-w-7xl mx-auto px-4">
@@ -60,12 +65,15 @@ export default function Navbar() {
                         <MoneyIcon className="h-6 w-6" />
                         <span className="sr-only">Daffa Inc</span>
                     </Link>
-                    <nav className="hidden md:flex gap-8">
-                        {menus.map((menu) => (
-                            <Link key={menu.path} className="font-medium flex items-center text-sm transition-colors hover:underline" href={menu.path}>
-                                {menu.name}
-                            </Link>
-                        ))}
+                    <nav className="hidden md:flex gap-5">
+                        {menus.map((menu) => {
+                            console.log(pathName === menu.path)
+                            return (
+                                <Link key={menu.path} className={`font-medium flex items-center text-sm transition-colors hover:underline px-3 ${(pathName === menu.path) ? "bg-white py-1 rounded-lg text-gray-900" : ""}`} href={menu.path}>
+                                    {menu.name}
+                                </Link>
+                            )
+                        } )}
                     </nav>
                     <div className="flex items-center gap-4">
                         <Button size="sm" variant="outline">
