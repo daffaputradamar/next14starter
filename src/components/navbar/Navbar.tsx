@@ -13,26 +13,26 @@ function MoneyIcon(props: any) {
     )
 }
 
-function MenuIcon(props : any) {
+function MenuIcon(props: any) {
     return (
-      <svg
-        {...props}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <line x1="4" x2="20" y1="12" y2="12" />
-        <line x1="4" x2="20" y1="6" y2="6" />
-        <line x1="4" x2="20" y1="18" y2="18" />
-      </svg>
+        <svg
+            {...props}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <line x1="4" x2="20" y1="12" y2="12" />
+            <line x1="4" x2="20" y1="6" y2="6" />
+            <line x1="4" x2="20" y1="18" y2="18" />
+        </svg>
     )
-  }
+}
 
 export default function Navbar() {
 
@@ -40,7 +40,7 @@ export default function Navbar() {
         {
             path: "/",
             name: "Home"
-        }, 
+        },
         {
             path: "/about",
             name: "About"
@@ -56,10 +56,10 @@ export default function Navbar() {
     ]
 
     const pathName = usePathname()
-    
+
     return (
-        <nav className="inset-x-0 top-0 z-50 bg-white shadow-sm dark:bg-gray-950/90">
-            <div className="w-full max-w-7xl mx-auto px-4">
+        <nav className="inset-x-0 top-0 z-50">
+            <div className="w-full max-w-7xl mx-auto px-4 py-2">
                 <div className="flex justify-between h-14 items-center">
                     <Link className="flex items-center" href="/">
                         <MoneyIcon className="h-6 w-6" />
@@ -67,35 +67,51 @@ export default function Navbar() {
                     </Link>
                     <nav className="hidden md:flex gap-5">
                         {menus.map((menu) => {
-                            console.log(pathName === menu.path)
                             return (
-                                <Link key={menu.path} className={`font-medium flex items-center text-sm transition-colors hover:underline px-3 ${(pathName === menu.path) ? "bg-white py-1 rounded-lg text-gray-900" : ""}`} href={menu.path}>
+                                <Link key={menu.path} className={`font-medium flex items-center text-sm transition-colors hover:underline px-4 ${(pathName === menu.path) ? "bg-primary py-2 rounded-lg text-primary-foreground" : ""}`} href={menu.path}>
                                     {menu.name}
                                 </Link>
                             )
-                        } )}
+                        })}
                     </nav>
                     <div className="flex items-center gap-4">
-                        <Button size="sm" variant="outline">
-                            Sign in
-                        </Button>
-                        <Button size="sm">Sign up</Button>
+                        <Link href="/login">
+                            <Button size="sm" variant="outline">
+                                Sign in
+                            </Button>
+                        </Link>
+                        <Link href="/register">
+                            <Button size="sm">Sign up</Button>
+                        </Link>
 
                         <Sheet>
                             <SheetTrigger asChild>
-                            <Button className="md:hidden" size="icon" variant="outline">
-                                <MenuIcon className="h-6 w-6" />
-                                <span className="sr-only">Toggle navigation menu</span>
-                            </Button>
+                                <Button className="md:hidden" size="icon" variant="outline">
+                                    <MenuIcon className="h-6 w-6" />
+                                    <span className="sr-only">Toggle navigation menu</span>
+                                </Button>
                             </SheetTrigger>
-                            <SheetContent side={"left"}> 
-                            <div className="grid gap-2 py-6">
-                                {menus.map((menu) => (
-                                    <Link key={menu.path} className="flex w-full items-center py-2 text-lg font-semibold" href={menu.path}>
-                                    {menu.name}
-                                    </Link>
-                                ))}
-                            </div>
+                            <SheetContent side={"left"}>
+                                <div className="flex flex-col justify-between h-full">
+                                    <div className="grid gap-2 py-6">
+                                        {menus.map((menu) => (
+                                            <Link key={menu.path} className={`flex w-full items-center py-2 px-3 text-lg font-semibold ${(pathName === menu.path) ? "bg-primary rounded-md text-primary-foreground" : ""}`} href={menu.path}>
+                                                {menu.name}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                    {/* <div>
+                                        <Link href="/login">
+                                            <Button size="sm" variant="outline">
+                                                Sign in
+                                            </Button>
+                                        </Link>
+                                        <Link href="/register">
+                                            <Button size="sm">Sign up</Button>
+                                        </Link>
+                                    </div> */}
+
+                                </div>
                             </SheetContent>
                         </Sheet>
                     </div>

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,12 +25,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} min-h-screen h-screen flex flex-col justify-between`}> 
-        <div className="flex flex-col gap-4 h-full">
-          <Navbar />
-          {children}
-        </div>
-        <Footer /> 
+      <body className={`${inter.className} min-h-screen h-screen flex flex-col justify-between`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system">
+          <div className="flex flex-col gap-4 h-full">
+            <Navbar />
+            {children}
+          </div>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
