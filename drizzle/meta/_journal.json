@@ -1,0 +1,13 @@
+{
+  "version": "6",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1715571831286,
+      "tag": "0000_smart_rhodey",
+      "breakpoints": true
+    }
+  ]
+}

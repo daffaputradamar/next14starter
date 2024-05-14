@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button"
 
 export default function Login() {
   return (
-    <main className="flex h-full items-center justify-center px-4">
+    <main className="flex h-full items-center justify-center px-4 flex-grow">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">Login</CardTitle>

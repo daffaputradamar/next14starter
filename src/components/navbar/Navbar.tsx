@@ -55,7 +55,11 @@ export default function Navbar() {
         }
     ]
 
-    const pathName = usePathname()
+    let pathName = usePathname()
+    pathName = "/" + pathName.split("/")[1]
+
+    const session = true
+    const isAdmin = true
 
     return (
         <nav className="inset-x-0 top-0 z-50">
@@ -75,14 +79,34 @@ export default function Navbar() {
                         })}
                     </nav>
                     <div className="flex items-center gap-4">
-                        <Link href="/login">
-                            <Button size="sm" variant="outline">
-                                Sign in
-                            </Button>
-                        </Link>
-                        <Link href="/register">
-                            <Button size="sm">Sign up</Button>
-                        </Link>
+                        {
+                            (session) ? (
+                                <>
+                                    {
+                                        (isAdmin) && <Link className={`font-medium flex items-center text-sm transition-colors hover:underline px-4 ${(pathName === '/admin') ? "bg-primary py-2 rounded-lg text-primary-foreground" : ""}`} href={'/admin'}>
+                                            Admin
+                                        </Link>
+                                    }
+                                    <Link href="#">
+                                        <Button size="sm" variant="outline">
+                                            Sign Out
+                                        </Button>
+                                    </Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Link href="/login">
+                                        <Button size="sm" variant="outline">
+                                            Sign in
+                                        </Button>
+                                    </Link>
+                                    <Link href="/register">
+                                        <Button size="sm">Sign up</Button>
+                                    </Link>
+                                </>
+                            )
+                        }
+
 
                         <Sheet>
                             <SheetTrigger asChild>
@@ -100,16 +124,6 @@ export default function Navbar() {
                                             </Link>
                                         ))}
                                     </div>
-                                    {/* <div>
-                                        <Link href="/login">
-                                            <Button size="sm" variant="outline">
-                                                Sign in
-                                            </Button>
-                                        </Link>
-                                        <Link href="/register">
-                                            <Button size="sm">Sign up</Button>
-                                        </Link>
-                                    </div> */}
 
                                 </div>
                             </SheetContent>
